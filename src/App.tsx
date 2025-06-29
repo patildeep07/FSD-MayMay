@@ -5,12 +5,14 @@ import "./App.css";
 import Shimmer from "./components/Shimmer";
 import type { MemeType } from "./types/types";
 import MemeCard from "./components/MemeCard";
+import Error from "./components/Error";
 
 function App() {
   document.title = "MayMay";
 
   const [memes, setMemes] = useState<MemeType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isError, setIsError] = useState<boolean>(false);
 
   const getMemes = async () => {
     try {
@@ -22,8 +24,10 @@ function App() {
       setMemes((prev) => [...prev, ...data.memes]);
 
       setIsLoading(false);
+      setIsError(false);
     } catch (error) {
-      console.log(error);
+      setIsError(true);
+      console.error(error);
     }
   };
 
@@ -52,6 +56,7 @@ function App() {
         </div>
       )}
       {isLoading && <Shimmer />}
+      {isError && <Error />}
     </>
   );
 }
