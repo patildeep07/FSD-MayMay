@@ -2,7 +2,7 @@ const Shimmer = () => {
   const count = Array.from(Array(12).keys());
 
   return (
-    <div className="flex flex-row flex-wrap gap-10 justify-start items-center">
+    <div className="flex flex-row flex-wrap gap-10 justify-center items-center">
       {count.map((elem) => (
         <div
           key={elem}

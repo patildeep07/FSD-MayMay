@@ -4,8 +4,11 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Shimmer from "./components/Shimmer";
 import type { MemeType } from "./types/types";
+import MemeCard from "./components/MemeCard";
 
 function App() {
+  document.title = "MayMay";
+
   const [memes, setMemes] = useState<MemeType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -42,22 +45,9 @@ function App() {
     <>
       <h1 className="font-bold text-[24px] mb-4">MayMay</h1>
       {memes && (
-        <div className="flex flex-row flex-wrap gap-10 justify-start align-middle ">
+        <div className="flex flex-row flex-wrap gap-10 justify-center align-middle ">
           {memes.map((meme, idx) => {
-            return (
-              <div
-                key={idx}
-                className="w-64 h-72 border-solid border-gray-400 gap-1 border-2 my-1 flex flex-col justify-between"
-              >
-                <img
-                  alt={meme.title}
-                  src={meme.preview[0]}
-                  className="aspect-square"
-                />
-
-                <h1>{meme.author}</h1>
-              </div>
-            );
+            return <MemeCard meme={meme} key={idx} />;
           })}
         </div>
       )}
